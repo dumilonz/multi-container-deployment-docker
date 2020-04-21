@@ -1,0 +1,26 @@
+langauge: generic
+sudo: required
+services:
+    -docker
+
+before_install:
+    - docker build -t dumilonz/complex-fib-test -f ./client/Dockerfile.dev ./client
+# here you can build other test suits in other folders
+
+script:
+    - docker run -e CI=true dumilonz/complex-fib0test npm test
+    # here you can run different test suits
+
+after_succes:
+    # build production versions of all containers and push off to Dockerhub
+    - docker build -t dumilonz/multicontainer-client ./client .
+    - docker build -t dumilonz/multicontainer-nginx ./nginx .
+    - docker build -t dumilonz/multicontainer-server ./server .
+    - docker build -t dumilonz/multicontainer-worker ./worker .
+    # login in docker CLI - put in encripted Travis CLI
+    - echo "$DOCKER_PASSWORD" |  docker login -u "$DOCKER_ID" --password-stdin
+    # take build containers and push to Dockerhub
+    - docker push dumilonz/multicontainer-client
+    - docker push dumilonz/multicontainer-server
+    - docker push dumilonz/multicontainer-nginx
+    - docker push dumilonz/multicontainer-worker
