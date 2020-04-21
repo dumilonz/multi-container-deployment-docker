@@ -4,11 +4,11 @@ services:
     -docker
 
 before_install:
-    - docker build -t dumilonz/complex-fib-test -f ./client/Dockerfile.dev ./client
+    - docker build -t dumilonz/multicontainer-react-test -f ./client/Dockerfile.dev ./client
 # here you can build other test suits in other folders
 
 script:
-    - docker run -e CI=true dumilonz/complex-fib0test npm test
+    - docker run -e CI=true dumilonz/multicontainer-react-test npm test
     # here you can run different test suits
 
 after_succes:
