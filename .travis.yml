@@ -13,10 +13,10 @@ script:
 
 after_succes:
     # build production versions of all containers and push off to Dockerhub
-    - docker build -t dumilonz/multicontainer-client ./client .
-    - docker build -t dumilonz/multicontainer-nginx ./nginx .
-    - docker build -t dumilonz/multicontainer-server ./server .
-    - docker build -t dumilonz/multicontainer-worker ./worker .
+    - docker build -t dumilonz/multicontainer-client ./client
+    - docker build -t dumilonz/multicontainer-nginx ./nginx
+    - docker build -t dumilonz/multicontainer-server ./server
+    - docker build -t dumilonz/multicontainer-worker ./worker
     # login in docker CLI - put in encripted Travis CLI
     - echo "$DOCKER_PASSWORD" |  docker login -u "$DOCKER_ID" --password-stdin
     # take build containers and push to Dockerhub
