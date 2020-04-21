@@ -21,6 +21,6 @@ after_succes:
     - echo "$DOCKER_PASSWORD" |  docker login -u "$DOCKER_ID" --password-stdin
     # take build containers and push to Dockerhub
     - docker push dumilonz/multicontainer-client
-    - docker push dumilonz/multicontainer-server
     - docker push dumilonz/multicontainer-nginx
+    - docker push dumilonz/multicontainer-server
     - docker push dumilonz/multicontainer-worker
