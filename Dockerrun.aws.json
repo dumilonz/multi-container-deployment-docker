@@ -1,0 +1,40 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "dumilonz/multicontainer-client:latest",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "dumilonz/multicontainer-nginx:latest",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 80
+                }
+            ], 
+            "links": [
+                "client", 
+                "server"
+            ]
+        },
+        {
+            "name": "server",
+            "image": "dumilonz/multicontainer-server:latest",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "dumilonz/multicontainer-worker:latest",
+            "hostname": "worker",
+            "essential": false  
+        }
+    ]
+
+}

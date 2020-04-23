@@ -1,5 +1,7 @@
 langauge: generic
 sudo: required
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key: $AWS_SECRET_KEY
 services:
     -docker
 
@@ -24,3 +26,17 @@ after_succes:
     - docker push dumilonz/multicontainer-nginx
     - docker push dumilonz/multicontainer-server
     - docker push dumilonz/multicontainer-worker
+
+deploy:
+    edge: true
+    provider: elasticbeanstalk
+    region: us-east-2
+    app: multicontainer-docker
+    env: MulticontainerDocker-env
+    bucket_name: elasticbeanstalk-us-east-2-622542045500
+    bucket_path: multicontainer-docker
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+        secure: $AWS_SECRET_KEY

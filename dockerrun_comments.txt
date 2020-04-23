@@ -1,0 +1,19 @@
+
+Use online JSON validator.
+
+Need to read about task definitons in Amazon Elastic Container Service (ECS) for this file format
+Look at Container definitions in documentation.
+
+Hostname comes from the docker-compose file. 
+Hostnames allow any other document that uses the docker-compose  file to access the container.
+
+Essential flag if true.
+If that container crashes, EB will stop all other containers as the  essentail container crashed. 
+Atleast 1 service has to be essential. 
+
+Don't need to as hostname to nginx or worker as no other container needs to access nginx.
+nginx reroutes and does not get called by any other  service.
+
+links: you need to more explicitly  state which containers can. be accessed from which containers
+Only 1 directional. 
+Name property is used for link. Not hostname
